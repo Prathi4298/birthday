@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-
 <html>
 <head>
   <title>🎁 Surprise 🎁</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <style>
     body {
       margin: 0;
@@ -11,44 +11,135 @@
       text-align: center;
       background: linear-gradient(135deg, #ff9a9e, #fad0c4);
       color: white;
+      overflow: hidden;
     }
 
-```
-.container {
-  margin-top: 40%;
-}
+    .section {
+      display: none;
+      height: 100vh;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
 
-button {
-  padding: 15px 25px;
-  font-size: 20px;
-  border: none;
-  border-radius: 10px;
-  background-color: #ff4081;
-  color: white;
-  cursor: pointer;
-}
+    .active {
+      display: flex;
+    }
 
-h1 {
-  display: none;
-  margin-top: 20px;
-  font-size: 30px;
-}
-```
+    img {
+      width: 200px;
+      border-radius: 50%;
+      margin-top: 20px;
+      border: 4px solid white;
+    }
 
+    /* Falling Button */
+    .btn {
+      position: absolute;
+      top: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 15px 25px;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      background: #ff4081;
+      color: white;
+      cursor: pointer;
+    }
+
+    .fall {
+      animation: fall 1.5s forwards;
+    }
+
+    @keyframes fall {
+      to { top: 60%; }
+    }
+
+    .message {
+      margin-top: 20px;
+      padding: 0 20px;
+      line-height: 1.6;
+    }
+
+    .gifts {
+      font-size: 40px;
+      margin-top: 20px;
+      animation: pop 1s infinite alternate;
+    }
+
+    @keyframes pop {
+      from { transform: scale(1); }
+      to { transform: scale(1.2); }
+    }
   </style>
 </head>
 
 <body>
 
-<div class="container">
+<!-- PAGE 1 -->
+<div id="page1" class="section active">
   <h2>🎁 Tap the gift 🎁</h2>
-  <button onclick="showWish()">Open Me</button>
-  <h1 id="wish">🎉 Happy Birthday 🎂🥳</h1>
+  <button class="btn fall" onclick="goPage2()">Open Me 💛</button>
+</div>
+
+<!-- PAGE 2 -->
+<div id="page2" class="section">
+  <h1>🎉 Happy Birthday 🎂🥳</h1>
+  <!-- <img src="C:\Users\Prathiksha M D\Downloads\ayesha.jpeg"> -->
+  <p>To my best friend 💛</p>
+
+  <button id="btn2" class="btn">Click here 💌</button>
+</div>
+
+<!-- PAGE 3 -->
+<div id="page3" class="section">
+  <p class="message">
+    You are one of the most amazing people in my life 💫<br><br>
+    Thank you for always being there 🤝<br><br>
+    I’m really lucky to have you as my best friend 💛
+  </p>
+
+  <button id="btn3" class="btn">Take my gift 🎁</button>
+</div>
+
+<!-- PAGE 4 -->
+<div id="page4" class="section">
+  <h2>🎉 Surprise 🎉</h2>
+  <div class="gifts">🧸 🎂 🎁 💐 🍫 💖</div>
+  <p>All this for you 💛 Stay happy always 😊</p>
 </div>
 
 <script>
-  function showWish() {
-    document.getElementById("wish").style.display = "block";
+  function goPage2() {
+    switchPage("page1", "page2");
+
+    setTimeout(() => {
+      let btn = document.getElementById("btn2");
+      btn.style.display = "block";
+      btn.classList.add("fall");
+      btn.onclick = goPage3;
+    }, 1000);
+  }
+
+  function goPage3() {
+    switchPage("page2", "page3");
+
+    setTimeout(() => {
+      let btn = document.getElementById("btn3");
+      btn.style.display = "block";
+      btn.classList.add("fall");
+      btn.onclick = goPage4;
+    }, 1000);
+  }
+
+  function goPage4() {
+    switchPage("page3", "page4");
+  }
+
+  function switchPage(hide, show) {
+    document.getElementById(hide).classList.remove("active");
+    document.getElementById(show).classList.add("active");
   }
 </script>
 
